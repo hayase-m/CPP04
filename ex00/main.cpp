@@ -43,5 +43,5 @@ static void testWrongPolymorphism() {
 int main() {
   testPolymorphism();
   testWrongPolymorphism();
-  return (0);
+  return 0;
 }

@@ -3,7 +3,7 @@
 #include <iostream>
 
 Dog::Dog() : Animal() {
-  this->type = "Dog";
+  type = "Dog";
   std::cout << "Dog default constructor called" << std::endl;
 }
 
@@ -17,7 +17,7 @@ Dog &Dog::operator=(const Dog &other) {
   std::cout << "Dog copy assignment operator called" << std::endl;
   if (this != &other)
     Animal::operator=(other);
-  return (*this);
+  return *this;
 }
 
 void Dog::makeSound() const { std::cout << "Woof!" << std::endl; }

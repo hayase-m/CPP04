@@ -15,11 +15,11 @@ Animal::~Animal() { std::cout << "Animal destructor called" << std::endl; }
 Animal &Animal::operator=(const Animal &other) {
   std::cout << "Animal copy assignment operator called" << std::endl;
   if (this != &other)
-    this->type = other.type;
-  return (*this);
+    type = other.type;
+  return *this;
 }
 
-const std::string &Animal::getType() const { return (this->type); }
+const std::string &Animal::getType() const { return type; }
 
 void Animal::makeSound() const {
   std::cout << "Animal makes an indistinct sound" << std::endl;
