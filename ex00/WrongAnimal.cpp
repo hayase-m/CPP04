@@ -24,5 +24,5 @@ WrongAnimal &WrongAnimal::operator=(const WrongAnimal &other) {
 const std::string &WrongAnimal::getType() const { return type; }
 
 void WrongAnimal::makeSound() const {
-  std::cout << "WrongAnimal makes a confused sound" << std::endl;
+  std::cout << "WrongAnimal sound" << std::endl;
 }
