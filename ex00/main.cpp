@@ -27,6 +27,7 @@ static void testPolymorphism() {
 static void testWrongPolymorphism() {
   const WrongAnimal *wrongMeta = new WrongAnimal();
   WrongCat *wrongCat = new WrongCat();
+  // Keep the derived pointer for safe delete;
   const WrongAnimal *wrongAsAnimal = wrongCat;
 
   std::cout << std::endl;
