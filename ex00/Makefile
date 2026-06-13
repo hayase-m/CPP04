@@ -5,9 +5,11 @@ CXX = c++
 # -MMD: write header dependencies to .d files.
 # -MP: add dummy header targets so removed headers do not break make.
 CXXFLAGS = -Wall -Wextra -Werror -std=c++98 -pedantic -MMD -MP
+INCLUDES = -Iinclude
 
 SRCS = main.cpp Animal.cpp Dog.cpp Cat.cpp WrongAnimal.cpp WrongCat.cpp
 
+SRCDIR = src
 OBJDIR = objs
 # main.cpp -> objs/main.o, Animal.cpp -> objs/Animal.o
 OBJS = $(SRCS:%.cpp=$(OBJDIR)/%.o)
@@ -23,9 +25,9 @@ $(NAME): $(OBJS)
 
 # $< is the first prerequisite, $@ is the target file.
 # -c compiles without linking; -o $@ writes the object file.
-$(OBJDIR)/%.o: %.cpp
+$(OBJDIR)/%.o: $(SRCDIR)/%.cpp
 	@mkdir -p $(OBJDIR)
-	$(CXX) $(CXXFLAGS) -c $< -o $@
+	$(CXX) $(CXXFLAGS) $(INCLUDES) -c $< -o $@
 
 clean:
 	$(RM) $(OBJDIR)
