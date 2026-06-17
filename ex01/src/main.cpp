@@ -12,6 +12,9 @@ int main() {
   animals[3] = new Cat();
 
   for (int i = 0; i < 4; i++)
+    animals[i]->makeSound();
+
+  for (int i = 0; i < 4; i++)
     delete animals[i];
 
   std::cout << std::endl;
