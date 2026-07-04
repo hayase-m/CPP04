@@ -1,5 +1,4 @@
 #include "Cat.hpp"
-
 #include <iostream>
 
 Cat::Cat() : Animal(), brain(new Brain()) {
