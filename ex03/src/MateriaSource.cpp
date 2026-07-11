@@ -31,11 +31,13 @@ void MateriaSource::learnMateria(AMateria *materia) {
       return;
     }
   }
+  // Ownership always moves here: when full, destroy so the caller never leaks.
+  delete materia;
 }
 
 AMateria *MateriaSource::createMateria(std::string const &type) {
   for (int i = 0; i < 4; i++) {
-    if (_materias[i]->getType() == type)
+    if (_materias[i] && _materias[i]->getType() == type)
       return _materias[i]->clone();
   }
   return 0;
@@ -50,9 +52,9 @@ void MateriaSource::clearMaterias(void) {
 
 void MateriaSource::copyMaterias(const MateriaSource &other) {
   for (int i = 0; i < 4; i++) {
-    if (_materias[i])
-      this->_materias[i] = other._materias[i]->clone();
+    if (other._materias[i])
+      _materias[i] = other._materias[i]->clone();
     else
-      this->_materias[i] = 0;
+      _materias[i] = 0;
   }
 }

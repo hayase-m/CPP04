@@ -39,16 +39,19 @@ void Character::equip(AMateria *materia) {
       return;
     }
   }
+  // Ownership always moves here: when full, destroy so the caller never leaks.
+  delete materia;
 }
 
 void Character::unequip(int idx) {
-  if (idx < 0)
+  if (idx < 0 || idx >= 4 || !_inventory[idx])
     return;
+  // unequip must not delete; the caller has to keep and delete this pointer.
   _inventory[idx] = 0;
 }
 
 void Character::use(int idx, ICharacter &target) {
-  if (idx < 0)
+  if (idx < 0 || idx >= 4 || !_inventory[idx])
     return;
   _inventory[idx]->use(target);
 }
@@ -62,7 +65,7 @@ void Character::clearInventory(void) {
 
 void Character::copyInventory(const Character &other) {
   for (int i = 0; i < 4; i++) {
-    if (_inventory[i])
+    if (other._inventory[i])
       _inventory[i] = other._inventory[i]->clone();
     else
       _inventory[i] = 0;
