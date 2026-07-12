@@ -31,7 +31,6 @@ void MateriaSource::learnMateria(AMateria *materia) {
       return;
     }
   }
-  // Ownership always moves here: when full, destroy so the caller never leaks.
   delete materia;
 }
 
