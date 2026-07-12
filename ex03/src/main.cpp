@@ -9,8 +9,10 @@
 #include <iostream>
 
 // 所有権のルール:
-// - learnMateria/equip:
-// 渡した時点で所有権が移る。満杯なら受け取った側がdeleteする。
+// - learnMateria:
+// 渡した時点で所有権がsrcへ移る。満杯でもsrc側が引き取ってdeleteする。
+// - equip:
+// 成功なら所有権がCharacterへ移る。満杯なら何も起きず所有権は呼び出し側のまま。
 // - createMateria:
 // 新しいcloneを返し、所有権は呼び出し側。deleteするかequipで手放す。
 // - unequip:
@@ -51,7 +53,10 @@ int main() {
   std::cout << "\n[full inventory]" << std::endl;
   me->equip(src->createMateria("ice"));
   me->equip(src->createMateria("cure"));
-  me->equip(src->createMateria("ice"));
+  // 満杯のequipは何も起きない。アドレスを控えてあるので自分でdeleteする
+  AMateria *overflow = src->createMateria("ice");
+  me->equip(overflow);
+  delete overflow;
 
   std::cout << "\n[full materia source]" << std::endl;
   src->learnMateria(new Ice());
