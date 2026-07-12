@@ -16,6 +16,7 @@ public:
 
   void makeSound() const;
   const Brain *getBrainAddress(void) const;
+  Brain *getBrain(void);
 };
 
 #endif
