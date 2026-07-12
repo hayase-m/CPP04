@@ -1,6 +1,8 @@
 #include "Character.hpp"
 #include "AMateria.hpp"
 
+#include <iostream>
+
 Character::Character(void) : _name("") {
   for (int i = 0; i < 4; i++)
     _inventory[i] = 0;
@@ -31,26 +33,41 @@ Character::~Character(void) { clearInventory(); }
 std::string const &Character::getName(void) const { return _name; }
 
 void Character::equip(AMateria *materia) {
-  if (!materia)
+  if (!materia) {
+    std::cerr << "Character: equip: null materia" << std::endl;
     return;
+  }
   for (int i = 0; i < 4; i++) {
     if (!_inventory[i]) {
       _inventory[i] = materia;
       return;
     }
   }
+  std::cerr << "Character: equip: inventory full, materia discarded" << std::endl;
   delete materia;
 }
 
 void Character::unequip(int idx) {
-  if (idx < 0 || idx >= 4 || !_inventory[idx])
+  if (idx < 0 || idx >= 4) {
+    std::cerr << "Character: unequip: invalid index " << idx << std::endl;
     return;
+  }
+  if (!_inventory[idx]) {
+    std::cerr << "Character: unequip: slot " << idx << " is empty" << std::endl;
+    return;
+  }
   _inventory[idx] = 0;
 }
 
 void Character::use(int idx, ICharacter &target) {
-  if (idx < 0 || idx >= 4 || !_inventory[idx])
+  if (idx < 0 || idx >= 4) {
+    std::cerr << "Character: use: invalid index " << idx << std::endl;
     return;
+  }
+  if (!_inventory[idx]) {
+    std::cerr << "Character: use: slot " << idx << " is empty" << std::endl;
+    return;
+  }
   _inventory[idx]->use(target);
 }
 
