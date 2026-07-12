@@ -39,14 +39,12 @@ void Character::equip(AMateria *materia) {
       return;
     }
   }
-  // Ownership always moves here: when full, destroy so the caller never leaks.
   delete materia;
 }
 
 void Character::unequip(int idx) {
   if (idx < 0 || idx >= 4 || !_inventory[idx])
     return;
-  // unequip must not delete; the caller has to keep and delete this pointer.
   _inventory[idx] = 0;
 }
 
