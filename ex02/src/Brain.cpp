@@ -20,10 +20,9 @@ Brain &Brain::operator=(const Brain &other) {
 
 Brain::~Brain() { std::cout << "Brain destructor called" << std::endl; }
 
-const std::string &Brain::getIdea(int idx) const {
-  static const std::string empty;
+std::string Brain::getIdea(int idx) const {
   if (idx < 0 || idx >= 100)
-    return empty;
+    return "";
   return ideas[idx];
 }
 

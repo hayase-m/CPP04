@@ -45,5 +45,8 @@ int main() {
             << " / copy: " << catCopy.getBrain()->getIdea(0)
             << " / assign: " << catAssign.getBrain()->getIdea(0) << std::endl;
 
+  if (cat.getBrain()->getIdea(100).empty())
+    std::cout << "out of range returns an empty string" << std::endl;
+
   return 0;
 }
