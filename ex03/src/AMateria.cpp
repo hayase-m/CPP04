@@ -7,8 +7,8 @@ AMateria::AMateria(void) : type("") {}
 AMateria::AMateria(const AMateria &other) : type(other.type) {}
 
 AMateria &AMateria::operator=(const AMateria &other) {
-  if (this != &other)
-    type = other.type;
+  // typeはクラス固有の識別子なのでコピーしない(subjectのヒント準拠)
+  (void)other;
   return *this;
 }
 
